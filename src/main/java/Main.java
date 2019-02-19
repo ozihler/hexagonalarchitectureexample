@@ -1,4 +1,7 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -6,7 +9,7 @@ import java.util.Map;
 
 public class Main {
 
-    static InputStream in = System.in;
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     static PrintStream out = System.out;
 
     public static void main(String[] args) throws IOException {
@@ -16,7 +19,6 @@ public class Main {
         List<String> toDoList = toDoLists.get("Daily Routine");
         show(toDoList);
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
         String nextLine;
         do {
@@ -30,13 +32,13 @@ public class Main {
             show(toDoList);
         } while (nextLine != null && !nextLine.isBlank());
 
-        System.out.println("Finished adding items to todo list");
+        out.println("Finished adding items to todo list");
     }
 
     private static void show(List<String> toDoList) {
-        System.out.println("All items in todo list:");
-        System.out.println("=======================");
-        toDoList.forEach(System.out::println);
-        System.out.println("=======================");
+        out.println("All items in todo list:");
+        out.println("=======================");
+        toDoList.forEach(out::println);
+        out.println("=======================");
     }
 }
