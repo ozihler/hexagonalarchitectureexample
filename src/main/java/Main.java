@@ -2,23 +2,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
-
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     static PrintStream out = System.out;
 
-    public static void main(String[] args) throws IOException {
-        Map<String, List<String>> toDoLists = new HashMap<>();
-        toDoLists.put("Daily Routine", new ArrayList<>(List.of("Grocery Shopping", "Fitness")));
-
-        List<String> toDoList = toDoLists.get("Daily Routine");
-        show(toDoList);
-
+    public static void main(String[] args) throws IOException, URISyntaxException {
+        List<String> todoList = Files.readAllLines(Path.of(Main.class.getResource("todolist.txt").toURI()));
 
         String nextLine;
         do {
@@ -26,19 +20,17 @@ public class Main {
             nextLine = reader.readLine();
 
             if (nextLine != null && !nextLine.isBlank()) {
-                toDoLists.get("Daily Routine").add(nextLine);
+                todoList.add(nextLine);
+            } else {
+                out.println("Finished adding items to todo list");
             }
 
-            show(toDoList);
+            out.println("All items in todo list:");
+            out.println("=======================");
+            for (String s : todoList) {
+                out.println(s);
+            }
+            out.println("=======================");
         } while (nextLine != null && !nextLine.isBlank());
-
-        out.println("Finished adding items to todo list");
-    }
-
-    private static void show(List<String> toDoList) {
-        out.println("All items in todo list:");
-        out.println("=======================");
-        toDoList.forEach(out::println);
-        out.println("=======================");
     }
 }
