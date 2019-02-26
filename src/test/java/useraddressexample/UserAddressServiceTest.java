@@ -34,7 +34,6 @@ public class UserAddressServiceTest {
         verify(iRetrieveUsers, times(1)).findUserById(userId);
         verify(iStoreUserAddresses, times(1)).storeUserAddress(user, address);
         verify(iUpdateAddressView, times(1)).updateView(address);
-
     }
 
     @Test
