@@ -2,21 +2,21 @@ package useraddressexample;
 
 import java.util.Optional;
 
-public class UserAddressService implements IUpdateUserAddress {
+public class UserAddressService implements IUpdateUserAddresses {
     private final IRetrieveUsers iRetrieveUsers;
-    private final IStoreUserAddresses iStoreUserAddresses;
-    private final IUpdateAddressView iUpdateAddressView;
+    private final IUpdateUsers iUpdateUsers;
+    private final IConsumeAddresses iConsumeAddresses;
 
-    UserAddressService(IRetrieveUsers iRetrieveUsers, IStoreUserAddresses iStoreUserAddresses, IUpdateAddressView iUpdateAddressView) {
+    UserAddressService(IRetrieveUsers iRetrieveUsers, IUpdateUsers iUpdateUsers, IConsumeAddresses iConsumeAddresses) {
         this.iRetrieveUsers = iRetrieveUsers;
-        this.iStoreUserAddresses = iStoreUserAddresses;
-        this.iUpdateAddressView = iUpdateAddressView;
+        this.iUpdateUsers = iUpdateUsers;
+        this.iConsumeAddresses = iConsumeAddresses;
     }
 
     @Override
     public void update(long userId, Address address) {
         Optional<User> userO = iRetrieveUsers.findUserById(userId);
-        userO.ifPresent(user -> iStoreUserAddresses.storeUserAddress(user, address));
-        iUpdateAddressView.updateView(address);
+        userO.ifPresent(user -> iUpdateUsers.storeUserAddress(user, address));
+        iConsumeAddresses.consume(address);
     }
 }

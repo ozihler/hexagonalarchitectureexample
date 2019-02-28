@@ -2,25 +2,25 @@ package useraddressexample;
 
 import java.io.PrintStream;
 
-public class ConsoleUserProfile implements IUpdateAddressView {
+public class ConsoleUserProfile implements IConsumeAddresses {
     private PrintStream console;
     //Maybe better has an AddressForm and a UserProfile
-    private IUpdateUserAddress iUpdateUserAddress;
+    private IUpdateUserAddresses iUpdateUSerAddresses;
 
-    public ConsoleUserProfile(PrintStream console, IUpdateUserAddress iUpdateUserAddress) {
+    public ConsoleUserProfile(PrintStream console, IUpdateUserAddresses iUpdateUSerAddresses) {
         this.console = console;
-        this.iUpdateUserAddress = iUpdateUserAddress;
+        this.iUpdateUSerAddresses = iUpdateUSerAddresses;
     }
 
     @Override
-    public void updateView(Address address) {
+    public void consume(Address address) {
         console.println(address);
     }
 
     public void updateAddressOf(long id) {
         //Input address from console
         Address address = readFromConsole();
-        iUpdateUserAddress.update(id, address);
+        iUpdateUSerAddresses.update(id, address);
     }
 
     private Address readFromConsole() {

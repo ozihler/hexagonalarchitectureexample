@@ -1,5 +1,5 @@
 package useraddressexample;
 
-public interface IUpdateUserAddress {
+public interface IUpdateUserAddresses {
     void update(long userId, Address address);
 }

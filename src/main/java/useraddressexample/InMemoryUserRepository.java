@@ -3,7 +3,7 @@ package useraddressexample;
 import java.util.Map;
 import java.util.Optional;
 
-public class InMemoryUserRepository implements IRetrieveUsers, IStoreUserAddresses {
+public class InMemoryUserRepository implements IRetrieveUsers, IUpdateUsers {
     private Map<User, Address> userAddresses;
 
     public InMemoryUserRepository(Map<User, Address> userAddresses) {
